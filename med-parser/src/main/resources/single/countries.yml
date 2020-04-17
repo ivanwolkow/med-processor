@@ -1,0 +1,27 @@
+
+baseDir: 'D:/med/'
+input: 'src/pubmed_result-ALL-countries.txt'
+partitionSize: 50
+partitionNumber: 4
+
+countries:
+  russia:
+      output: 'russia_out'
+      keywords: ['Russia', 'Russian Federation']
+      predicate: FIRST_AUTHOR
+  japan:
+      output: 'japan_out'
+      keywords: ['Japan']
+      predicate: FIRST_AUTHOR
+  china:
+      output: 'china_out'
+      keywords: ['China']
+      predicate: FIRST_AUTHOR
+  taiwan:
+      output: 'taiwan_out'
+      keywords: ['Taiwan']
+      predicate: FIRST_AUTHOR
+  uk:
+      output: 'uk_out'
+      keywords: ['UK', 'United Kingdom', 'England']
+      predicate: FIRST_AUTHOR
