@@ -14,7 +14,7 @@ public class FirstAffiliationContainsPredicate implements BasePredicate {
 
     @Override
     public boolean test(MedEntry medEntry) {
-        return StreamEx.of(medEntry.affiliations)
+        return StreamEx.of(medEntry.getAffiliations())
                 .findFirst()
                 .map(this::reduceAffiliation)
                 .filter(author -> keywords.stream().anyMatch(author::contains))

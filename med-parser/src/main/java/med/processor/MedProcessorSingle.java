@@ -1,11 +1,10 @@
-package med.processor.single;
+package med.processor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.google.common.collect.Lists;
-import med.processor.Processor;
-import med.processor.single.config.AppConfig;
-import med.processor.single.config.CountryConfig;
+import med.processor.config.AppConfig;
+import med.processor.config.CountryConfig;
 import one.util.streamex.EntryStream;
 import med.common.MedEntry;
 import med.common.PredicateName;
@@ -91,9 +90,9 @@ public class MedProcessorSingle implements Processor {
                 .parallel()
                 .forKeyValue((id, medEntry) -> {
                     if (predicate.test(medEntry)) {
-                        matched.put(medEntry.id, medEntry);
+                        matched.put(id, medEntry);
                     } else {
-                        unmatched.put(medEntry.id, medEntry);
+                        unmatched.put(id, medEntry);
                     }
                 });
 

@@ -45,11 +45,9 @@ public class BlinderApp {
 
         logger.info("Parsing input...");
         var allEntries = medEntryParser.parse(input);
-        logger.info("Found {} entries", allEntries.size());
 
-        var result = allEntries.values().stream()
-                .map(MedEntry::getBasicInfo)
-                .collect(Collectors.joining("\r\n"));
+        logger.info("Found {} entries", allEntries.size());
+        var result = medEntryParser.saveReduced(allEntries.values());
 
         File dir = (new File(outputFileName)).getParentFile();
 

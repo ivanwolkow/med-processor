@@ -1,19 +1,7 @@
-
 1. Rev Med Chil. 2019 Oct;147(10):1291-1302. doi: 10.4067/s0034-98872019001001291.
 
 [Gender differences in clinical features and performance of sleep questionnaires
 in adults with obstructive sleep apnea syndrome].
-
-[Article in Spanish]
-
-Saldías Peñafiel F(1), Salinas Rossel G, Cortés Meza J, Farías Nesvadba D,
-Peñaloza Tapia A, Aguirre Mardones C(2), Díaz Patiño O(1).
-
-Author information:
-(1)Departamento de Enfermedades Respiratorias, Facultad de Medicina, Pontificia
-Universidad Católica de Chile, Santiago, Chile.
-(2)Departamento de Neurología, Facultad de Medicina, Pontificia Universidad
-Católica de Chile, Santiago, Chile.
 
 BACKGROUND: Women with obstructive sleep apnea-hypopnea syndrome (OSAS) are less
 likely to be assessed or to receive an appropriate diagnosis, and they may have
@@ -41,3 +29,4 @@ due to circumstances related to a different OSAS clinical expression.
 
 DOI: 10.4067/s0034-98872019001001291
 PMID: 32186637  [Indexed for MEDLINE]
+

@@ -1,4 +1,4 @@
-package med.processor.single.config;
+package med.processor.config;
 
 import java.util.Map;
 
