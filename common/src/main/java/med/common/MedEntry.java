@@ -4,13 +4,13 @@ import java.util.List;
 
 public class MedEntry {
 
-    public int id;
-    public String publisher;
-    public String title;
-    public String authorsAndCollaborators;
-    public List<String> affiliations;
-    public String text;
-    public String all;
+    private int id;
+    private String publisher;
+    private String title;
+    private String authorsAndCollaborators;
+    private List<String> affiliations;
+    private String text;
+    private String all;
 
     public MedEntry(int id, String publisher, String title, String authorsAndCollaborators, List<String> affiliations, String text, String all) {
         this.id = id;
@@ -22,15 +22,31 @@ public class MedEntry {
         this.all = all;
     }
 
-    public String getBasicInfo() {
-        return String.format("%d. %s\r\n\r\n%s\r\n\r\n%s\r\n\r\n", id, publisher, title, text);
+    public int getId() {
+        return id;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthorsAndCollaborators() {
+        return authorsAndCollaborators;
+    }
+
+    public List<String> getAffiliations() {
+        return affiliations;
+    }
+
+    public String getText() {
+        return text;
     }
 
     public String getAll() {
         return all;
-    }
-
-    public int getId() {
-        return id;
     }
 }

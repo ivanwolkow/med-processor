@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 class MedEntryParserTest {
@@ -38,6 +39,29 @@ class MedEntryParserTest {
         String s = loadResource("med_entries_0.txt");
         Map<Integer, MedEntry> result = parser.parse(s);
         Assertions.assertEquals(0, result.size());
+    }
+
+    @Test
+    void parseSaveParseTest() {
+        String s = loadResource("med_entries_3.txt");
+
+        Map<Integer, MedEntry> parsed = parser.parse(s);
+        String saved = parser.save(parsed.values());
+        LinkedHashMap<Integer, MedEntry> result = parser.parse(saved);
+
+        Assertions.assertEquals(3, result.size());
+    }
+
+    @Test
+    void saveReducedTest() {
+        String full = loadResource("med_entries_1.txt");
+        Map<Integer, MedEntry> parsed = parser.parse(full);
+        String result = parser.saveReduced(parsed.values());
+
+        String refString = loadResource("med_entries_1_reduced.txt")
+                .replace("\r\n", "\n");
+
+        Assertions.assertEquals(refString, result);
     }
 
     private String loadResource(String name) {

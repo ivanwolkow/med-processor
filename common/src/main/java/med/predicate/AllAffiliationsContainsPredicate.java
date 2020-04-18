@@ -13,7 +13,7 @@ public class AllAffiliationsContainsPredicate implements BasePredicate {
 
     @Override
     public boolean test(MedEntry medEntry) {
-        return medEntry.affiliations.stream()
+        return medEntry.getAffiliations().stream()
                 .allMatch(author -> keywords.stream()
                         .anyMatch(author::contains));
     }

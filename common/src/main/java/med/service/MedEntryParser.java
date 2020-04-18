@@ -2,43 +2,64 @@ package med.service;
 
 import med.common.MedEntry;
 import one.util.streamex.StreamEx;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.util.Arrays.stream;
-import static java.util.function.Function.identity;
 import static java.util.function.Predicate.not;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 public class MedEntryParser {
 
     private static final Logger logger = LoggerFactory.getLogger(MedEntryParser.class);
 
-    private static final String splitToEntriesPattern = "\\r\\n(?=\\r\\n\\r\\n\\d+\\.)";
-    private static final Pattern entryPattern = Pattern.compile(".*?(\\d+?)\\. (.+?)\\r\\n\\r\\n(.+?)\\r\\n\\r\\n(.+?)Author information:.*?\\r\\n(.+?)\\r\\n\\r\\n(.+)", Pattern.DOTALL);
+    private static final String fieldSeparator = "\n\n";
+    private static final String entrySeparator = "\n\n\n";
+    private static final String splitToEntriesPattern = "[\\n[\\r\\n]]{3}(?=\\d+\\. )";
+    private static final Pattern entryPattern = Pattern.compile(".*?(\\d+?)\\. (.+?)\\R\\R(.+?)\\R\\R(.+?)Author information:.*?\\R(.+?)\\R\\R(.+)", Pattern.DOTALL);
 
     public MedEntryParser() {
     }
 
-    public Map<Integer, MedEntry> parse(String src) {
+    public LinkedHashMap<Integer, MedEntry> parse(String src) {
         return StreamEx.of(src.split(splitToEntriesPattern))
                 .parallel()
                 .map(this::map)
                 .remove(Objects::isNull)
-                .toMap(MedEntry::getId, identity());
+                .collect(LinkedHashMap::new, (map, entry) -> map.put(entry.getId(), entry), HashMap::putAll);
     }
 
-    private MedEntry map(String src) {
+    public String save(Collection<MedEntry> entries) {
+        return entries.stream()
+                .map(MedEntry::getAll)
+                .collect(joining(entrySeparator));
+    }
+
+    public String saveReduced(Collection<MedEntry> entries) {
+        return entries.stream()
+                .map(MedEntryParser::convertToStringReduced)
+                .collect(joining(fieldSeparator));
+    }
+
+    private static String convertToStringReduced(MedEntry medEntry) {
+        return medEntry.getId() + ". " + medEntry.getPublisher() + fieldSeparator +
+                medEntry.getTitle() + fieldSeparator +
+                medEntry.getText() + fieldSeparator;
+    }
+
+    private MedEntry map(String src1) {
+        String src = StringUtils.trimToEmpty(src1).replaceAll("\r\n", "\n");
+
         Matcher m = entryPattern.matcher(src);
 
         if (!m.find()) {
-            logger.warn("Bad entry: {}", src.substring(0, 20).replaceAll("\r\n", " "));
+            logger.warn("Bad entry: {}", src.substring(0, Math.min(src.length(), 20)));
             return null;
         }
 
