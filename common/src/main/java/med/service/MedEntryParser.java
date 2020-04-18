@@ -28,6 +28,8 @@ public class MedEntryParser {
     }
 
     public LinkedHashMap<Integer, MedEntry> parse(String src) {
+        if (StringUtils.isBlank(src)) return new LinkedHashMap<>();
+
         return StreamEx.of(src.split(splitToEntriesPattern))
                 .parallel()
                 .map(this::map)
