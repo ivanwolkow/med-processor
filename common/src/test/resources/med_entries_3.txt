@@ -1,0 +1,138 @@
+
+1. Rev Med Chil. 2019 Oct;147(10):1291-1302. doi: 10.4067/s0034-98872019001001291.
+
+[Gender differences in clinical features and performance of sleep questionnaires 
+in adults with obstructive sleep apnea syndrome].
+
+[Article in Spanish]
+
+Saldías Peñafiel F(1), Salinas Rossel G, Cortés Meza J, Farías Nesvadba D,
+Peñaloza Tapia A, Aguirre Mardones C(2), Díaz Patiño O(1).
+
+Author information:
+(1)Departamento de Enfermedades Respiratorias, Facultad de Medicina, Pontificia
+Universidad Católica de Chile, Santiago, Chile.
+(2)Departamento de Neurología, Facultad de Medicina, Pontificia Universidad
+Católica de Chile, Santiago, Chile.
+
+BACKGROUND: Women with obstructive sleep apnea-hypopnea syndrome (OSAS) are less 
+likely to be assessed or to receive an appropriate diagnosis, and they may have
+poorer quality of life and survival rates.
+AIM: To assess gender-specific clinical differences in adult patients with OSAS.
+MATERIAL AND METHODS: A standardized clinical questionnaire and four sleep
+questionnaires (Berlin, Epworth Sleepiness Scale, STOP and STOP-Bang) were
+administered and anthropometric data were measured. Patients underwent an
+overnight in-laboratory polysomnography to confirm the diagnosis of OSAS.
+Receiver operating characteristic curves, sensitivity and specificity of clinical
+manifestations and sleep questionnaires were calculated.
+RESULTS: Of 1,464 screened patients, 509 were female, 58.6% had moderate to
+severe OSAS. Clinical variables associated with OSAS risk in women were age,
+insomnia, nocturia, hypertension and cervical circumference. Paired by age and
+respiratory events, the snoring frequency was similar in both genders, although
+witnessed apneas and high cervical circumference and waist/hip ratio were more
+common in males. Morning headaches, insomnia, excessive daytime sleepiness,
+depression, anxiety and poor quality of sleep were more common in women. Women
+were older than men, more obese (although with an obesity pattern less centrally 
+distributed) and referred hypertension, diabetes, depression and hypothyroidism
+with higher frequency. Sleep questionnaires performance were similar in both
+sexes.
+CONCLUSIONS: It is likely that women with OSAS may partially be underdiagnosed
+due to circumstances related to a different OSAS clinical expression.
+
+DOI: 10.4067/s0034-98872019001001291 
+PMID: 32186637  [Indexed for MEDLINE]
+
+
+2. Rev Med Chil. 2019 Oct;147(10):1256-1265. doi: 10.4067/s0034-98872019001001256.
+
+[Features of patients with trauma admitted to an emergency room of a general
+hospital].
+
+[Article in Spanish]
+
+Ruiz C(1), Vega E(2), Barrera G(3), Ramos JP(4), Mimica X(2), Lisbona ML(1), Arau
+R(5), Fulle A(6), Aquevedo A(1), Díaz MÁ(1).
+
+Author information: 
+(1)Unidad de Cuidados Intensivos, Santiago, Chile.
+(2)Servicio de Cirugía, Complejo Asistencial Dr. Sótero del Río, Santiago, Chile.
+(3)Departamento de Medicina Intensiva, Pontificia Universidad Católica de Chile, 
+Santiago, Chile.
+(4)Escuela de Medicina, Pontificia Universidad Católica de Chile, Santiago,
+Chile.
+(5)Servicio de Radiología, Complejo Asistencial Dr. Sótero del Río, Santiago,
+Chile.
+(6)Servicio de Urgencia Adulto, Complejo Asistencial Dr. Sótero del Río,
+Santiago, Chile.
+
+BACKGROUND: Trauma is the main cause of death among people aged 5 to 44 years.
+AIM: To describe features, treatment and evolution of trauma patients admitted to
+an emergency room.
+MATERIAL AND METHODS: Adult patients admitted in the emergency department of a
+public hospital due to severe trauma were studied and followed during their
+hospital stay.
+RESULTS: We included 114 patients aged 40 ± 17 years (78%men) with an injury
+severity score of 21 ± 11. Trauma was penetrating in 43%. Traumatic brain injury 
+(TBI) was the most common diagnosis in 46%. In the emergency room, 8% had
+hypotension, 5% required vasopressors and 23% required mechanical ventilation.
+The initial lactate was 3.6 ± 2.9 mmol/L. Sixty-five patients (57%) required
+emergency surgery. The intraoperative lactate was 3 ± 1.7 mmol/L and 20% required
+vasopressors. Sixty-four patients (56%) were admitted to the ICU, with APACHEII
+and SOFA scores of 16 ± 8 and 5 ± 3, respectively. ICU lactate was 3.2±1.5
+mmol/L. In the ICU 40% required vasopressors and 63% mechanical ventilation.
+Thirty two percent had coagulopathy, 43% received transfusions and 10% required
+massive transfusions. The hospital stay was 13 (6-32) days, being significantly
+longer in patients with TBI. ICU and hospital mortalities were 12.5 and 18.4%
+respectively. The only predictor for mortality was the APACHEII score (Hazard
+Ratio 1.18, 95% confidence intervals 1.03-1.36).
+CONCLUSIONS: APACHE score was a predictor of mortality in this group of patients.
+
+DOI: 10.4067/s0034-98872019001001256 
+PMID: 32186633  [Indexed for MEDLINE]
+
+
+3. Psychiatr Danub. 2019 Dec;31(Suppl 5):774-780.
+
+Factors Contributing to the Reduction of Pain during Electromyography and Nerve
+Conduction Studies.
+
+Delimar V(1), Miloš O, Hančević M, Bilić H, Krbot Skorić M, Milivojević I, Sitaš 
+B, Bilić K, Bilić E.
+
+Author information: 
+(1)Special Hospital for Medical Rehabilitation Krapinske Toplice, Krapinske
+Toplice, Croatia.
+
+BACKGROUND: Electromyography (EMG) and nerve conduction studies (NCS) are an
+unpleasant and sometimes painful examinations. Pain can reduce patient's
+compliance and have a negative effect on the examination results. Different
+studies report that music affects pain perception by acting as a distractor, by
+inducing positive emotional valence or through the concept of convergence of
+different sensory modalities. The aim of this study was to explore the effect of 
+music and different environmental and sociodemographic factors on pain perception
+during EMG and NCS.
+SUBJECTS AND METHODS: Sixty patients with suspected neuromuscular disease were
+randomized into music and control group. Specific questionnaire assessed
+sociodemographic characteristics, medical history, examination waiting time,
+examination extent and biometeorological forecast. The numerical rating scale was
+used for the evaluation of pain. The examiner evaluated patient's compliance
+after the examination.
+RESULTS: NCS was less painful for patients in the music group (p=0.03), as well
+as for more cooperative patients (p=0.011). For patients who previously underwent
+EMG/NCS, present NCS was more painful (p=0.001), regardless of the music
+intervention (p=0.019). EMG was more painful for older patients (p=0.041).
+Patients with lower level of education reported lower pain during NCS (p=0.026). 
+Gender, financial satisfaction, biometeorological forecast, diabetes, depression 
+or malignant disease, use and dosing of analgesics or antidepressants, symptoms, 
+examination waiting time and the examination extent had no effect on pain
+perception.
+CONCLUSIONS: Music significantly decreased the perception of pain associated with
+NCS, but not the EMG portion of the examination. During EMG pain level was not
+significantly reduced, but the median of pain was still lower. Generally, the
+pain level during NCS, unlike the one during EMG, was affected by patients'
+compliance, level of education and painful predetermination. We propose using
+music during EMG/NCS because it can make the examination more comfortable for the
+patient and thus contribute to better quality of this examination.
+
+
+PMID: 32160171  [Indexed for MEDLINE]

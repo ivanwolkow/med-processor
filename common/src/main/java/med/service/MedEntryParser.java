@@ -21,7 +21,7 @@ public class MedEntryParser {
     private static final Logger logger = LoggerFactory.getLogger(MedEntryParser.class);
 
     private static final String splitToEntriesPattern = "\\r\\n(?=\\r\\n\\r\\n\\d+\\.)";
-    private static final Pattern entryPattern = Pattern.compile(".*?(\\d+?)\\. (.+?)\\r\\n\\r\\n(.+?)\\r\\n\\r\\n(.+?)Author information: \\r\\n(.+?)\\r\\n\\r\\n(.+)", Pattern.DOTALL);
+    private static final Pattern entryPattern = Pattern.compile(".*?(\\d+?)\\. (.+?)\\r\\n\\r\\n(.+?)\\r\\n\\r\\n(.+?)Author information:.*?\\r\\n(.+?)\\r\\n\\r\\n(.+)", Pattern.DOTALL);
 
     public MedEntryParser() {
     }

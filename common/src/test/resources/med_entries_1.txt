@@ -1,0 +1,43 @@
+
+1. Rev Med Chil. 2019 Oct;147(10):1291-1302. doi: 10.4067/s0034-98872019001001291.
+
+[Gender differences in clinical features and performance of sleep questionnaires 
+in adults with obstructive sleep apnea syndrome].
+
+[Article in Spanish]
+
+Saldías Peñafiel F(1), Salinas Rossel G, Cortés Meza J, Farías Nesvadba D,
+Peñaloza Tapia A, Aguirre Mardones C(2), Díaz Patiño O(1).
+
+Author information:
+(1)Departamento de Enfermedades Respiratorias, Facultad de Medicina, Pontificia
+Universidad Católica de Chile, Santiago, Chile.
+(2)Departamento de Neurología, Facultad de Medicina, Pontificia Universidad
+Católica de Chile, Santiago, Chile.
+
+BACKGROUND: Women with obstructive sleep apnea-hypopnea syndrome (OSAS) are less
+likely to be assessed or to receive an appropriate diagnosis, and they may have
+poorer quality of life and survival rates.
+AIM: To assess gender-specific clinical differences in adult patients with OSAS.
+MATERIAL AND METHODS: A standardized clinical questionnaire and four sleep
+questionnaires (Berlin, Epworth Sleepiness Scale, STOP and STOP-Bang) were
+administered and anthropometric data were measured. Patients underwent an
+overnight in-laboratory polysomnography to confirm the diagnosis of OSAS.
+Receiver operating characteristic curves, sensitivity and specificity of clinical
+manifestations and sleep questionnaires were calculated.
+RESULTS: Of 1,464 screened patients, 509 were female, 58.6% had moderate to
+severe OSAS. Clinical variables associated with OSAS risk in women were age,
+insomnia, nocturia, hypertension and cervical circumference. Paired by age and
+respiratory events, the snoring frequency was similar in both genders, although
+witnessed apneas and high cervical circumference and waist/hip ratio were more
+common in males. Morning headaches, insomnia, excessive daytime sleepiness,
+depression, anxiety and poor quality of sleep were more common in women. Women
+were older than men, more obese (although with an obesity pattern less centrally
+distributed) and referred hypertension, diabetes, depression and hypothyroidism
+with higher frequency. Sleep questionnaires performance were similar in both
+sexes.
+CONCLUSIONS: It is likely that women with OSAS may partially be underdiagnosed
+due to circumstances related to a different OSAS clinical expression.
+
+DOI: 10.4067/s0034-98872019001001291
+PMID: 32186637  [Indexed for MEDLINE]
