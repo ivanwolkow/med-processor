@@ -20,7 +20,7 @@ public class ParserMain {
 
     private static final Logger logger = LoggerFactory.getLogger(ParserMain.class);
 
-    private List<Processor> processors;
+    private final List<Processor> processors;
 
     public ParserMain(List<Processor> processors) {
         this.processors = processors;

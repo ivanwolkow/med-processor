@@ -23,21 +23,21 @@ class MedEntryParserTest {
     @Test
     void parseMultipleEntries() {
         String s = loadResource("med_entries_3.txt");
-        Map<Integer, MedEntry> result = parser.parse(s);
+        Map<String, MedEntry> result = parser.parse(s);
         Assertions.assertEquals(3, result.size());
     }
 
     @Test
     void parseSingleEntry() {
         String s = loadResource("med_entries_1.txt");
-        Map<Integer, MedEntry> result = parser.parse(s);
+        Map<String, MedEntry> result = parser.parse(s);
         Assertions.assertEquals(1, result.size());
     }
 
     @Test
     void parseNoEntries() {
         String s = loadResource("med_entries_0.txt");
-        Map<Integer, MedEntry> result = parser.parse(s);
+        Map<String, MedEntry> result = parser.parse(s);
         Assertions.assertEquals(0, result.size());
     }
 
@@ -45,9 +45,9 @@ class MedEntryParserTest {
     void parseSaveParseTest() {
         String s = loadResource("med_entries_3.txt");
 
-        Map<Integer, MedEntry> parsed = parser.parse(s);
+        Map<String, MedEntry> parsed = parser.parse(s);
         String saved = parser.save(parsed.values());
-        LinkedHashMap<Integer, MedEntry> result = parser.parse(saved);
+        LinkedHashMap<String, MedEntry> result = parser.parse(saved);
 
         Assertions.assertEquals(3, result.size());
     }
@@ -55,7 +55,7 @@ class MedEntryParserTest {
     @Test
     void saveReducedTest() {
         String full = loadResource("med_entries_1.txt");
-        Map<Integer, MedEntry> parsed = parser.parse(full);
+        Map<String, MedEntry> parsed = parser.parse(full);
         String result = parser.saveReduced(parsed.values());
 
         String refString = loadResource("med_entries_1_reduced.txt")

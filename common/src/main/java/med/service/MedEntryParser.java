@@ -27,7 +27,7 @@ public class MedEntryParser {
     public MedEntryParser() {
     }
 
-    public LinkedHashMap<Integer, MedEntry> parse(String src) {
+    public LinkedHashMap<String, MedEntry> parse(String src) {
         if (StringUtils.isBlank(src)) return new LinkedHashMap<>();
 
         return StreamEx.of(src.split(splitToEntriesPattern))
@@ -46,13 +46,13 @@ public class MedEntryParser {
     public String saveReduced(Collection<MedEntry> entries) {
         return entries.stream()
                 .map(MedEntryParser::convertToStringReduced)
-                .collect(joining(fieldSeparator));
+                .collect(joining(entrySeparator));
     }
 
     private static String convertToStringReduced(MedEntry medEntry) {
         return medEntry.getId() + ". " + medEntry.getPublisher() + fieldSeparator +
                 medEntry.getTitle() + fieldSeparator +
-                medEntry.getText() + fieldSeparator;
+                medEntry.getText();
     }
 
     private MedEntry map(String src1) {
@@ -65,7 +65,7 @@ public class MedEntryParser {
             return null;
         }
 
-        var id = Integer.parseInt(m.group(1));
+        var id = m.group(1);
         var publisher = m.group(2);
         var title = m.group(3);
         var authorsAndCollaborators = m.group(4);
