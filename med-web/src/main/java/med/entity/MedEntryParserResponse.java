@@ -4,7 +4,7 @@ import java.util.List;
 
 public class MedEntryParserResponse {
 
-    private int id;
+    private String id;
     private String publisher;
     private String title;
     private String authorsAndCollabs;
@@ -14,7 +14,7 @@ public class MedEntryParserResponse {
     public MedEntryParserResponse() {
     }
 
-    public MedEntryParserResponse(int id, String publisher, String title, String authorsAndCollabs, List<String> affiliations, String text) {
+    public MedEntryParserResponse(String id, String publisher, String title, String authorsAndCollabs, List<String> affiliations, String text) {
         this.id = id;
         this.publisher = publisher;
         this.title = title;
@@ -23,7 +23,7 @@ public class MedEntryParserResponse {
         this.text = text;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

@@ -7,17 +7,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-public class BlinderWebApp {
+public class WebApp {
 
-    private static final Logger logger = LoggerFactory.getLogger(BlinderWebApp.class);
+    private static final Logger logger = LoggerFactory.getLogger(WebApp.class);
 
     public void run() {
         logger.info("Spring boot application is available!");
     }
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(BlinderWebApp.class, args);
-        BlinderWebApp bean = context.getBean(BlinderWebApp.class);
+        ConfigurableApplicationContext context = SpringApplication.run(WebApp.class, args);
+        WebApp bean = context.getBean(WebApp.class);
         bean.run();
     }
 }

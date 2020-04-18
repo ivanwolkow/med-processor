@@ -10,10 +10,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>blinder-web</artifactId>
+    <artifactId>med-web</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
-    <name>blinder-web</name>
+    <name>med-web</name>
 
     <dependencies>
 

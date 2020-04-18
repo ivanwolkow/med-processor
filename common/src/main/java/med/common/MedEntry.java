@@ -4,7 +4,7 @@ import java.util.List;
 
 public class MedEntry {
 
-    private int id;
+    private String id;
     private String publisher;
     private String title;
     private String authorsAndCollaborators;
@@ -12,7 +12,7 @@ public class MedEntry {
     private String text;
     private String all;
 
-    public MedEntry(int id, String publisher, String title, String authorsAndCollaborators, List<String> affiliations, String text, String all) {
+    public MedEntry(String id, String publisher, String title, String authorsAndCollaborators, List<String> affiliations, String text, String all) {
         this.id = id;
         this.publisher = publisher;
         this.title = title;
@@ -22,7 +22,7 @@ public class MedEntry {
         this.all = all;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

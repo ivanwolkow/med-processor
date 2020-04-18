@@ -8,12 +8,12 @@ import med.service.MedEntryParser;
 import one.util.streamex.EntryStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Random;
 
@@ -36,11 +36,14 @@ public class BasicController {
     }
 
     @PostMapping(value = "/parse")
-    public Collection<MedEntryParserResponse> parse(@RequestBody MedEntryRequest request) {
-        logger.info("Parsing request with source size: {}",
-                request.getSource() != null ? request.getSource().length() : 0);
+    public Collection<MedEntryParserResponse> parse(@RequestParam MultipartFile file) throws IOException {
+        if (file == null) {
+            logger.warn("No file uploaded");
+            return Collections.emptyList();
+        }
 
-        LinkedHashMap<Integer, MedEntry> result = medEntryParser.parse(request.getSource());
+        var source = new String(file.getBytes());
+        LinkedHashMap<String, MedEntry> result = medEntryParser.parse(source);
         return EntryStream.of(result)
                 .mapValues(BasicController::map)
                 .values()

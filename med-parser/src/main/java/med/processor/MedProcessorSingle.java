@@ -78,11 +78,11 @@ public class MedProcessorSingle implements Processor {
         }
     }
 
-    private void processCountry(Map<Integer, MedEntry> allEntries, AppConfig appConfig, String countryName, CountryConfig countryConfig) {
+    private void processCountry(Map<String, MedEntry> allEntries, AppConfig appConfig, String countryName, CountryConfig countryConfig) {
         logger.info("Processing country: {}", countryName);
 
-        Map<Integer, MedEntry> matched = synchronizedMap(new TreeMap<>());
-        Map<Integer, MedEntry> unmatched = synchronizedMap(new TreeMap<>());
+        Map<String, MedEntry> matched = synchronizedMap(new TreeMap<>());
+        Map<String, MedEntry> unmatched = synchronizedMap(new TreeMap<>());
 
         Predicate<MedEntry> predicate = createPredicate(countryConfig.getPredicate(), countryConfig.getKeywords());
 
@@ -116,11 +116,14 @@ public class MedProcessorSingle implements Processor {
                     throw new RuntimeException("Failed to create output directory");
                 }
 
-                Files.write(Paths.get(appConfig.getOutputDir() + String.format("/%s_out_matched_%d.txt", countryName, matched.size())),
-                        matched.values().stream().map(MedEntry::getAll).collect(toList()), CREATE, WRITE, TRUNCATE_EXISTING);
+                var resultMatched = medEntryParser.save(matched.values());
+                var resultShuffled = medEntryParser.save(shuffled);
 
-                Files.write(Paths.get(appConfig.getOutputDir() + String.format("/%s_out_matched_shuffled_%d.txt", countryName, shuffled.size())),
-                        shuffled.stream().map(MedEntry::getAll).collect(toList()), CREATE, WRITE, TRUNCATE_EXISTING);
+                Files.writeString(Paths.get(appConfig.getOutputDir() + String.format("/%s_out_matched_%d.txt", countryName, matched.size())),
+                        resultMatched, CREATE, WRITE, TRUNCATE_EXISTING);
+
+                Files.writeString(Paths.get(appConfig.getOutputDir() + String.format("/%s_out_matched_shuffled_%d.txt", countryName, shuffled.size())),
+                        resultShuffled, CREATE, WRITE, TRUNCATE_EXISTING);
 
                 var chunks = Math.min(appConfig.getPartitionNumber(), partition.size());
                 if (chunks < appConfig.getPartitionNumber())
