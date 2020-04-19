@@ -35,27 +35,26 @@ public class MedProcessorSingle implements Processor {
 
     private static final Logger logger = LoggerFactory.getLogger(MedProcessorSingle.class);
 
-    private String configFileName;
-    private boolean dryRun;
-    private Set<String> countries;
-    private Random random;
+    private final String configFileName;
+    private final boolean dryRun;
+    private final Set<String> countries;
+    private final Random random;
 
-    private MedEntryParser medEntryParser;
+    private final MedEntryParser medEntryParser;
 
     public MedProcessorSingle(@Value("${countries:}") Set<String> countries,
                               @Value("${dryRun:false}") boolean dryRun,
                               @Value("${config:}") String configFileName,
-                              @Value("${randomSeed:372893751}") Long seed,
-                              MedEntryParser medEntryParser) {
+                              @Value("${randomSeed:372893751}") Long seed) {
         this.countries = countries;
         this.dryRun = dryRun;
         this.configFileName = configFileName;
         this.random = new Random(seed);
-        this.medEntryParser = medEntryParser;
+        this.medEntryParser = new MedEntryParser();
     }
 
     @Override
-    public void run() {
+    public void run(String[] args) {
         AppConfig appConfig = loadCountryConfig();
 
         Map<String, CountryConfig> configMap = countries.isEmpty()

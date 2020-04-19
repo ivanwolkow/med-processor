@@ -1,5 +1,5 @@
 package med.processor;
 
 public interface Processor {
-    void run();
+    void run(String[] args);
 }

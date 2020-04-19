@@ -3,7 +3,7 @@ package med.service;
 import med.common.MedEntry;
 import med.common.MedEntryReduced;
 import one.util.streamex.StreamEx;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
