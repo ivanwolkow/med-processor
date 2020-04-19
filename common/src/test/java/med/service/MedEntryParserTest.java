@@ -70,6 +70,14 @@ class MedEntryParserTest {
         Assertions.assertEquals(refString, result);
     }
 
+    @Test
+    void parseReducedEntries() {
+        String full = loadResource("med_entries_reduced_3.txt");
+
+        Collection<MedEntryReduced> entriesReduced = parser.parseReduced(full).values();
+        Assertions.assertEquals(3, entriesReduced.size());
+    }
+
     private String loadResource(String name) {
         try {
             URL resource = Resources.getResource(name);

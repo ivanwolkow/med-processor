@@ -1,26 +1,28 @@
 package med;
 
-import med.common.MedEntryReduced;
 import med.service.MedEntryParser;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVPrinter;
-import org.apache.commons.io.FilenameUtils;
+import one.util.streamex.EntryStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.*;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Set;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.nio.file.StandardOpenOption.*;
 
-
+/**
+ * Cuts off the authors, collaborators and affiliations, thus producing the "reduced" (or "blinded") publication list
+ */
 @SpringBootApplication
 public class BlinderApp implements ApplicationRunner {
 
@@ -36,7 +38,7 @@ public class BlinderApp implements ApplicationRunner {
 
         Set<String> optionNames = args.getOptionNames();
         if (!optionNames.containsAll(Set.of("in", "out"))) {
-            logger.error("Usage: java -jar blinder.jar --in=input.txt --out=output.csv");
+            logger.error("Usage: java -jar blinder.jar --in=input.txt --out=output.txt");
             return;
         }
 
@@ -61,27 +63,13 @@ public class BlinderApp implements ApplicationRunner {
             }
         }
 
-        if (FilenameUtils.isExtension(outputFileName, "csv")) {
-            logger.info("Printing CSV!");
-            List<MedEntryReduced> reducedEntries = medEntryParser.reduceAll(allEntries.values());
-            CSVPrinter csvPrinter = new CSVPrinter(new FileWriter(new File(outputFileName)), CSVFormat.DEFAULT.withDelimiter(';'));
+        var reduced = EntryStream.of(allEntries)
+                .mapValues(medEntryParser::reduce)
+                .values()
+                .toList();
 
-            for (MedEntryReduced m: reducedEntries) {
-                csvPrinter.printRecord(m.getId(), m.getPublisher(), m.getTitle(), m.getText());
-            }
-
-            csvPrinter.flush();
-            csvPrinter.close();
-            return;
-        }
-
-        if (FilenameUtils.isExtension(outputFileName, "txt")) {
-            var result = medEntryParser.print(allEntries.values());
-            Files.writeString(Paths.get(outputFileName), result, UTF_8, WRITE, TRUNCATE_EXISTING, CREATE);
-            return;
-        }
-
-        logger.error("Unknown output file format!");
+        var result = medEntryParser.printReduced(reduced);
+        Files.writeString(Paths.get(outputFileName), result, UTF_8, WRITE, TRUNCATE_EXISTING, CREATE);
     }
 
     public static void main(String[] args) throws IOException {

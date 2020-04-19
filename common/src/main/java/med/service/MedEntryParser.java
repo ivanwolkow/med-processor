@@ -23,7 +23,9 @@ public class MedEntryParser {
     private static final String fieldSeparator = "\n\n";
     private static final String entrySeparator = "\n\n\n";
     private static final String splitToEntriesPattern = "[\\n[\\r\\n]]{3}(?=\\d+\\. )";
+
     private static final Pattern entryPattern = Pattern.compile(".*?(\\d+?)\\. (.+?)\\R\\R(.+?)\\R\\R(.+?)Author information:.*?\\R(.+?)\\R\\R(.+)", Pattern.DOTALL);
+    private static final Pattern reducedEntryPattern = Pattern.compile(".*?(\\d+?)\\. (.+?)\\R\\R(.+?)\\R\\R(.+)", Pattern.DOTALL);
 
     public MedEntryParser() {
     }
@@ -34,6 +36,16 @@ public class MedEntryParser {
         return StreamEx.of(src.split(splitToEntriesPattern))
                 .parallel()
                 .map(this::map)
+                .remove(Objects::isNull)
+                .collect(LinkedHashMap::new, (map, entry) -> map.put(entry.getId(), entry), HashMap::putAll);
+    }
+
+    public LinkedHashMap<String, MedEntryReduced> parseReduced(String src) {
+        if (StringUtils.isBlank(src)) return new LinkedHashMap<>();
+
+        return StreamEx.of(src.split(splitToEntriesPattern))
+                .parallel()
+                .map(this::mapReduced)
                 .remove(Objects::isNull)
                 .collect(LinkedHashMap::new, (map, entry) -> map.put(entry.getId(), entry), HashMap::putAll);
     }
@@ -89,4 +101,23 @@ public class MedEntryParser {
 
         return new MedEntry(id, publisher, title, authorsAndCollaborators, affiliationList, text, src);
     }
+
+    private MedEntryReduced mapReduced(String src1) {
+        String src = StringUtils.trimToEmpty(src1).replaceAll("\r\n", "\n");
+
+        Matcher m = reducedEntryPattern.matcher(src);
+
+        if (!m.find()) {
+            logger.warn("Bad entry: {}", src.substring(0, Math.min(src.length(), 20)));
+            return null;
+        }
+
+        var id = m.group(1);
+        var publisher = m.group(2);
+        var title = m.group(3);
+        var text = m.group(4);
+
+        return new MedEntryReduced(id, publisher, title, text);
+    }
+
 }
