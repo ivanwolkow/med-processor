@@ -2,13 +2,16 @@ package med.service;
 
 import com.google.common.io.Resources;
 import med.common.MedEntry;
+import med.common.MedEntryReduced;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 class MedEntryParserTest {
@@ -46,7 +49,7 @@ class MedEntryParserTest {
         String s = loadResource("med_entries_3.txt");
 
         Map<String, MedEntry> parsed = parser.parse(s);
-        String saved = parser.save(parsed.values());
+        String saved = parser.print(parsed.values());
         LinkedHashMap<String, MedEntry> result = parser.parse(saved);
 
         Assertions.assertEquals(3, result.size());
@@ -55,8 +58,11 @@ class MedEntryParserTest {
     @Test
     void saveReducedTest() {
         String full = loadResource("med_entries_1.txt");
-        Map<String, MedEntry> parsed = parser.parse(full);
-        String result = parser.saveReduced(parsed.values());
+
+        Collection<MedEntry> entries = parser.parse(full).values();
+        List<MedEntryReduced> reduced = parser.reduceAll(entries);
+
+        String result = parser.printReduced(reduced);
 
         String refString = loadResource("med_entries_1_reduced.txt")
                 .replace("\r\n", "\n");

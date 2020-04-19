@@ -8,6 +8,7 @@
         <module>blinder</module>
         <module>common</module>
         <module>med-web</module>
+        <module>formatter</module>
     </modules>
 
     <parent>
