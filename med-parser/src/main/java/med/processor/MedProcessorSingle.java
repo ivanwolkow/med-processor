@@ -116,8 +116,8 @@ public class MedProcessorSingle implements Processor {
                     throw new RuntimeException("Failed to create output directory");
                 }
 
-                var resultMatched = medEntryParser.save(matched.values());
-                var resultShuffled = medEntryParser.save(shuffled);
+                var resultMatched = medEntryParser.print(matched.values());
+                var resultShuffled = medEntryParser.print(shuffled);
 
                 Files.writeString(Paths.get(appConfig.getOutputDir() + String.format("/%s_out_matched_%d.txt", countryName, matched.size())),
                         resultMatched, CREATE, WRITE, TRUNCATE_EXISTING);

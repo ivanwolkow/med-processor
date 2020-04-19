@@ -1,6 +1,7 @@
 package med.service;
 
 import med.common.MedEntry;
+import med.common.MedEntryReduced;
 import one.util.streamex.StreamEx;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -37,22 +38,32 @@ public class MedEntryParser {
                 .collect(LinkedHashMap::new, (map, entry) -> map.put(entry.getId(), entry), HashMap::putAll);
     }
 
-    public String save(Collection<MedEntry> entries) {
+    public String print(Collection<MedEntry> entries) {
         return entries.stream()
                 .map(MedEntry::getAll)
                 .collect(joining(entrySeparator));
     }
 
-    public String saveReduced(Collection<MedEntry> entries) {
+    public String printReduced(Collection<MedEntryReduced> entries) {
         return entries.stream()
                 .map(MedEntryParser::convertToStringReduced)
                 .collect(joining(entrySeparator));
     }
 
-    private static String convertToStringReduced(MedEntry medEntry) {
-        return medEntry.getId() + ". " + medEntry.getPublisher() + fieldSeparator +
-                medEntry.getTitle() + fieldSeparator +
-                medEntry.getText();
+    public MedEntryReduced reduce(MedEntry entry) {
+        return new MedEntryReduced(entry.getId(), entry.getPublisher(), entry.getTitle(), entry.getText());
+    }
+
+    public List<MedEntryReduced> reduceAll(Collection<MedEntry> entries) {
+        return StreamEx.of(entries)
+                .map(this::reduce)
+                .toList();
+    }
+
+    private static String convertToStringReduced(MedEntryReduced medEntryReduced) {
+        return medEntryReduced.getId() + ". " + medEntryReduced.getPublisher() + fieldSeparator +
+                medEntryReduced.getTitle() + fieldSeparator +
+                medEntryReduced.getText();
     }
 
     private MedEntry map(String src1) {

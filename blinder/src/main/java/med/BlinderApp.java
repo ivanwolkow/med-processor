@@ -1,27 +1,28 @@
 package med;
 
-import med.common.MedEntry;
+import med.common.MedEntryReduced;
 import med.service.MedEntryParser;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.WebApplicationType;
+import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.ConfigurableApplicationContext;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Set;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.nio.file.StandardOpenOption.*;
 
 
 @SpringBootApplication
-public class BlinderApp {
+public class BlinderApp implements ApplicationRunner {
 
     private static final Logger logger = LoggerFactory.getLogger(BlinderApp.class);
 
@@ -31,15 +32,16 @@ public class BlinderApp {
         this.medEntryParser = medEntryParser;
     }
 
-    public void run(String... args) throws IOException {
+    public void run(ApplicationArguments args) throws IOException {
 
-        if (args.length < 2) {
-            logger.error("Usage: java -jar blinder.jar input.txt output.txt");
+        Set<String> optionNames = args.getOptionNames();
+        if (!optionNames.containsAll(Set.of("in", "out"))) {
+            logger.error("Usage: java -jar blinder.jar --in=input.txt --out=output.csv");
             return;
         }
 
-        var inputFileName = args[0];
-        var outputFileName = args[1];
+        var inputFileName = args.getOptionValues("in").get(0);
+        var outputFileName = args.getOptionValues("out").get(0);
 
         String input = Files.readString(Paths.get(inputFileName));
 
@@ -47,19 +49,39 @@ public class BlinderApp {
         var allEntries = medEntryParser.parse(input);
 
         logger.info("Found {} entries", allEntries.size());
-        var result = medEntryParser.saveReduced(allEntries.values());
 
-        File dir = (new File(outputFileName)).getParentFile();
+        File outputFile = new File(outputFileName);
+        File outputDir = outputFile.getParentFile();
 
-        if (dir != null) {
-            dir.mkdirs();
-            if (!dir.exists()) {
-                logger.error("Failed to create output dir {}", dir);
+        if (outputDir != null) {
+            outputDir.mkdirs();
+            if (!outputDir.exists()) {
+                logger.error("Failed to create output dir {}", outputDir);
                 return;
             }
         }
 
-        Files.writeString(Paths.get(outputFileName), result, UTF_8, WRITE, TRUNCATE_EXISTING, CREATE);
+        if (FilenameUtils.isExtension(outputFileName, "csv")) {
+            logger.info("Printing CSV!");
+            List<MedEntryReduced> reducedEntries = medEntryParser.reduceAll(allEntries.values());
+            CSVPrinter csvPrinter = new CSVPrinter(new FileWriter(new File(outputFileName)), CSVFormat.DEFAULT.withDelimiter(';'));
+
+            for (MedEntryReduced m: reducedEntries) {
+                csvPrinter.printRecord(m.getId(), m.getPublisher(), m.getTitle(), m.getText());
+            }
+
+            csvPrinter.flush();
+            csvPrinter.close();
+            return;
+        }
+
+        if (FilenameUtils.isExtension(outputFileName, "txt")) {
+            var result = medEntryParser.print(allEntries.values());
+            Files.writeString(Paths.get(outputFileName), result, UTF_8, WRITE, TRUNCATE_EXISTING, CREATE);
+            return;
+        }
+
+        logger.error("Unknown output file format!");
     }
 
     public static void main(String[] args) throws IOException {
@@ -68,9 +90,7 @@ public class BlinderApp {
                 .sources(BlinderApp.class)
                 .build();
 
-        ConfigurableApplicationContext applicationContext = springApplication.run(args);
-        applicationContext.getBean(BlinderApp.class).run(args);
-
+        springApplication.run(args);
     }
 
 }
