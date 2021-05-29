@@ -3,14 +3,14 @@ package med.processor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.google.common.collect.Lists;
-import med.processor.config.AppConfig;
-import med.processor.config.CountryConfig;
-import one.util.streamex.EntryStream;
 import med.common.MedEntry;
 import med.common.PredicateName;
 import med.predicate.AllAffiliationsContainsPredicate;
 import med.predicate.FirstAffiliationContainsPredicate;
+import med.processor.config.AppConfig;
+import med.processor.config.CountryConfig;
 import med.service.MedEntryParser;
+import one.util.streamex.EntryStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -111,12 +111,10 @@ public class MedProcessorSingle implements Processor {
 
                 File outputDir = new File(appConfig.getOutputDir());
                 outputDir.mkdirs();
-                if (!outputDir.exists()) {
-                    throw new RuntimeException("Failed to create output directory");
-                }
+                if (!outputDir.exists()) throw new RuntimeException("Failed to create output directory");
 
-                var resultMatched = medEntryParser.print(matched.values());
-                var resultShuffled = medEntryParser.print(shuffled);
+                var resultMatched = medEntryParser.join(matched.values());
+                var resultShuffled = medEntryParser.join(shuffled);
 
                 Files.writeString(Paths.get(appConfig.getOutputDir() + String.format("/%s_out_matched_%d.txt", countryName, matched.size())),
                         resultMatched, CREATE, WRITE, TRUNCATE_EXISTING);
@@ -126,10 +124,12 @@ public class MedProcessorSingle implements Processor {
 
                 var chunks = Math.min(appConfig.getPartitionNumber(), partition.size());
                 if (chunks < appConfig.getPartitionNumber())
-                    logger.warn("Not enough matched entries for splitting into {} partitions by {} entries", appConfig.getPartitionNumber(), appConfig.getPartitionSize());
+                    logger.warn("Not enough matched entries for splitting into {} partitions by {} entries",
+                            appConfig.getPartitionNumber(), appConfig.getPartitionSize());
 
                 for (int i = 0; i < chunks; i++) {
-                    Files.write(Paths.get(appConfig.getOutputDir() + String.format("/%s_out_partition_%d_%d.txt", countryName, i, partition.get(i).size())), partition.get(i), CREATE, WRITE, TRUNCATE_EXISTING);
+                    Files.write(Paths.get(appConfig.getOutputDir() + String.format("/%s_out_partition_%d_%d.txt",
+                            countryName, i, partition.get(i).size())), partition.get(i), CREATE, WRITE, TRUNCATE_EXISTING);
                 }
 
                 logger.info("-----------------------------------------\n");
