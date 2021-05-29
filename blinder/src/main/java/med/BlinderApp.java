@@ -1,11 +1,11 @@
 package med;
 
 import med.service.MedEntryParser;
+import med.service.ReducedMedEntryParser;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -21,6 +21,7 @@ public class BlinderApp {
     private static final Logger logger = LoggerFactory.getLogger(BlinderApp.class);
 
     private MedEntryParser medEntryParser;
+    private ReducedMedEntryParser reducedMedEntryParser;
 
     public BlinderApp() {
         this.medEntryParser = new MedEntryParser();
@@ -41,18 +42,9 @@ public class BlinderApp {
         logger.info("Found {} entries", allEntries.size());
 
         var outputFileName = FilenameUtils.removeExtension(inputFileName) + "_blinded.txt";
-        File outputDir = new File(outputFileName).getParentFile();
 
-        if (outputDir != null) {
-            outputDir.mkdirs();
-            if (!outputDir.exists()) {
-                logger.error("Failed to create output dir {}", outputDir);
-                return;
-            }
-        }
-
-        var reduced = medEntryParser.reduceAll(allEntries.values());
-        var result = medEntryParser.printReduced(reduced);
+        var reduced = reducedMedEntryParser.reduceAll(allEntries.values());
+        var result = reducedMedEntryParser.joinReduced(reduced);
         Files.writeString(Paths.get(outputFileName), result, UTF_8, WRITE, TRUNCATE_EXISTING, CREATE);
     }
 

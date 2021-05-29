@@ -16,31 +16,33 @@ import java.util.Map;
 
 class MedEntryParserTest {
 
-    private MedEntryParser parser;
+    private MedEntryParser medEntryParser;
+    private ReducedMedEntryParser reducedMedEntryParser;
 
     @BeforeEach
     void setUp() {
-        parser = new MedEntryParser();
+        medEntryParser = new MedEntryParser();
+        reducedMedEntryParser = new ReducedMedEntryParser();
     }
 
     @Test
     void parseMultipleEntries() {
         String s = loadResource("med_entries_3.txt");
-        Map<String, MedEntry> result = parser.parse(s);
+        Map<String, MedEntry> result = medEntryParser.parse(s);
         Assertions.assertEquals(3, result.size());
     }
 
     @Test
     void parseSingleEntry() {
         String s = loadResource("med_entries_1.txt");
-        Map<String, MedEntry> result = parser.parse(s);
+        Map<String, MedEntry> result = medEntryParser.parse(s);
         Assertions.assertEquals(1, result.size());
     }
 
     @Test
     void parseNoEntries() {
         String s = loadResource("med_entries_0.txt");
-        Map<String, MedEntry> result = parser.parse(s);
+        Map<String, MedEntry> result = medEntryParser.parse(s);
         Assertions.assertEquals(0, result.size());
     }
 
@@ -48,9 +50,9 @@ class MedEntryParserTest {
     void parseSaveParseTest() {
         String s = loadResource("med_entries_3.txt");
 
-        Map<String, MedEntry> parsed = parser.parse(s);
-        String saved = parser.print(parsed.values());
-        LinkedHashMap<String, MedEntry> result = parser.parse(saved);
+        Map<String, MedEntry> parsed = medEntryParser.parse(s);
+        String saved = medEntryParser.join(parsed.values());
+        LinkedHashMap<String, MedEntry> result = medEntryParser.parse(saved);
 
         Assertions.assertEquals(3, result.size());
     }
@@ -59,10 +61,10 @@ class MedEntryParserTest {
     void saveReducedTest() {
         String full = loadResource("med_entries_1.txt");
 
-        Collection<MedEntry> entries = parser.parse(full).values();
-        List<MedEntryReduced> reduced = parser.reduceAll(entries);
+        Collection<MedEntry> entries = medEntryParser.parse(full).values();
+        List<MedEntryReduced> reduced = reducedMedEntryParser.reduceAll(entries);
 
-        String result = parser.printReduced(reduced);
+        String result = reducedMedEntryParser.joinReduced(reduced);
 
         String refString = loadResource("med_entries_1_reduced.txt")
                 .replace("\r\n", "\n");
@@ -74,7 +76,7 @@ class MedEntryParserTest {
     void parseReducedEntries() {
         String full = loadResource("med_entries_reduced_3.txt");
 
-        Collection<MedEntryReduced> entriesReduced = parser.parseReduced(full).values();
+        Collection<MedEntryReduced> entriesReduced = reducedMedEntryParser.parseReduced(full).values();
         Assertions.assertEquals(3, entriesReduced.size());
     }
 
