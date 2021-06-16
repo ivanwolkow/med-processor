@@ -1,16 +1,15 @@
 package med.predicate;
 
+import lombok.RequiredArgsConstructor;
 import med.common.MedEntry;
 import one.util.streamex.StreamEx;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 public class FirstAffiliationContainsPredicate implements BasePredicate {
-    private List<String> keywords;
 
-    public FirstAffiliationContainsPredicate(List<String> keywords) {
-        this.keywords = keywords;
-    }
+    private final List<String> keywords;
 
     @Override
     public boolean test(MedEntry medEntry) {

@@ -20,11 +20,12 @@ public class BlinderApp {
 
     private static final Logger logger = LoggerFactory.getLogger(BlinderApp.class);
 
-    private MedEntryParser medEntryParser;
-    private ReducedMedEntryParser reducedMedEntryParser;
+    private final MedEntryParser medEntryParser;
+    private final ReducedMedEntryParser reducedMedEntryParser;
 
     public BlinderApp() {
         this.medEntryParser = new MedEntryParser();
+        this.reducedMedEntryParser = new ReducedMedEntryParser();
     }
 
     public void run(String[] args) throws IOException {

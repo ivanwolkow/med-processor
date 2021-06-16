@@ -1,15 +1,13 @@
 package med.predicate;
 
+import lombok.RequiredArgsConstructor;
 import med.common.MedEntry;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 public class AllAffiliationsContainsPredicate implements BasePredicate {
-    private List<String> keywords;
-
-    public AllAffiliationsContainsPredicate(List<String> keywords) {
-        this.keywords = keywords;
-    }
+    private final List<String> keywords;
 
     @Override
     public boolean test(MedEntry medEntry) {

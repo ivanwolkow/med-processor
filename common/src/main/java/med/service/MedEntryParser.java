@@ -19,9 +19,6 @@ public class MedEntryParser {
 
     private static final Logger logger = LoggerFactory.getLogger(MedEntryParser.class);
 
-    public MedEntryParser() {
-    }
-
     public LinkedHashMap<String, MedEntry> parse(String src) {
         if (StringUtils.isBlank(src)) return new LinkedHashMap<>();
 
